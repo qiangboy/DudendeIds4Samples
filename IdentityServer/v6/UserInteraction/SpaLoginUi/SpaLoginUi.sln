@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServerWithSpaLogin"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcClient", "MvcClient\MvcClient.csproj", "{14EBFBC1-BD4F-4DBA-A8E9-175622591E4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsClientWeb", "JsClientWeb\JsClientWeb.csproj", "{3CAF98C0-7C3C-4784-BD75-2C8B38D7F7B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsClientWeb", "JsClientWeb\JsClientWeb.csproj", "{3CAF98C0-7C3C-4784-BD75-2C8B38D7F7B7}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3C5BF3F2-DD7E-40BB-A61C-A0DAAD37118F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{3CAF98C0-7C3C-4784-BD75-2C8B38D7F7B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CAF98C0-7C3C-4784-BD75-2C8B38D7F7B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CAF98C0-7C3C-4784-BD75-2C8B38D7F7B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C5BF3F2-DD7E-40BB-A61C-A0DAAD37118F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C5BF3F2-DD7E-40BB-A61C-A0DAAD37118F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C5BF3F2-DD7E-40BB-A61C-A0DAAD37118F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C5BF3F2-DD7E-40BB-A61C-A0DAAD37118F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

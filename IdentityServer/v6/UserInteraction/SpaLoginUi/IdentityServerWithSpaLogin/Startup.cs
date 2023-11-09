@@ -49,6 +49,8 @@ namespace IdentityServerWithSpaLogin
             // in-memory, code config
             builder.AddInMemoryIdentityResources(Config.IdentityResources);
             builder.AddInMemoryClients(Config.Clients);
+
+            services.ConfigureNonBreakingSameSiteCookies();
         }
 
         public void Configure(IApplicationBuilder app)
@@ -60,6 +62,8 @@ namespace IdentityServerWithSpaLogin
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            app.UseCookiePolicy();
 
             app.UseRouting();
             app.UseIdentityServer();

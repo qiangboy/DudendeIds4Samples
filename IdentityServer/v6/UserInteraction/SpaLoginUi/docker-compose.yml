@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  identityserverwithspalogin:
+    image: ${DOCKER_REGISTRY-}identityserverwithspalogin
+    build:
+      context: .
+      dockerfile: IdentityServerWithSpaLogin/Dockerfile
+
+  jsclientweb:
+    image: ${DOCKER_REGISTRY-}jsclientweb
+    build:
+      context: .
+      dockerfile: JsClientWeb/Dockerfile
+

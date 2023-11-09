@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+<script src="oidc-client.js"></script>
+<script>
+    // Code模式
+    //new Oidc.UserManager({ response_mode: "query", userStore: new Oidc.WebStorageStateStore(), loadUserInfo: true }).signinRedirectCallback().then(function() {
+    //        window.location = "index.html";
+    //    }).catch(function(e) {
+    //        console.error(e);
+    //    });
+    new Oidc.UserManager({ response_mode: "query" }).signinRedirectCallback().then(function () {
+        window.location = "index.html";
+    }).catch(function (e) {
+        console.error(e);
+    });
+
+    // Implicit模式
+    //new Oidc.UserManager().signinRedirectCallback().then(function() {
+    //        window.location = "index.html";
+    //    }).catch(function(e) {
+    //        console.error(e);
+    //    });
+    
+</script>
+</body>
+</html>

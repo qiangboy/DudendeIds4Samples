@@ -73,7 +73,7 @@
         }
 
         (async () => {
-            var response = await fetch("https://localhost:5001/spa/context?returnUrl=" + returnUrl,
+            var response = await fetch("/spa/context?returnUrl=" + returnUrl,
                 {
                     method: "GET",
                     credentials: "include",
@@ -108,7 +108,7 @@
                 returnUrl: returnUrl
             };
 
-            var response = await fetch("https://localhost:5001/spa/consent",
+            var response = await fetch("/spa/consent",
                 {
                     method: "POST",
                     headers: { "content-type": "application/json" },

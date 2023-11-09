@@ -47,7 +47,7 @@
         }
 
         (async () => {
-            var response = await fetch("https://localhost:5001/spa/error?errorId=" + errorId,
+            var response = await fetch("/spa/error?errorId=" + errorId,
                 {
                     method: "GET",
                     credentials: "include"

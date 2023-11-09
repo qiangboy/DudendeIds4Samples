@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31205.134
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServerWithSpaLogin", "IdentityServerWithSpaLogin\IdentityServerWithSpaLogin.csproj", "{1C627305-E87E-4AEB-ADEE-D1A6E0BDD0F1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcClient", "MvcClient\MvcClient.csproj", "{14EBFBC1-BD4F-4DBA-A8E9-175622591E4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsClientWeb", "JsClientWeb\JsClientWeb.csproj", "{3CAF98C0-7C3C-4784-BD75-2C8B38D7F7B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{14EBFBC1-BD4F-4DBA-A8E9-175622591E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14EBFBC1-BD4F-4DBA-A8E9-175622591E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14EBFBC1-BD4F-4DBA-A8E9-175622591E4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CAF98C0-7C3C-4784-BD75-2C8B38D7F7B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CAF98C0-7C3C-4784-BD75-2C8B38D7F7B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CAF98C0-7C3C-4784-BD75-2C8B38D7F7B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CAF98C0-7C3C-4784-BD75-2C8B38D7F7B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

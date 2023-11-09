@@ -48,7 +48,7 @@ var config = {
 };
 var mgr = new Oidc.UserManager(config);
 Oidc.Log.logger = console;
-//Oidc.Log.level = Oidc.Log.DEBUG;
+Oidc.Log.level = Oidc.Log.DEBUG;
 
 //mgr.events.addUserLoaded(function (user) {
 //    console.log("User loaded");

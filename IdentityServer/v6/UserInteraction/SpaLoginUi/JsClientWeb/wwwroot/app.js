@@ -34,7 +34,7 @@ var config = {
     //post_logout_redirect_uri: "http://4ygtt367.dongtaiyuming.net:22370/index.html",
     // 访问令牌提前通知时间，以触发AccessTokenExpiring事件和静默刷新token
     // 如果访问令牌的有效期是20秒，则每20-10=10秒触发一次AccessTokenExpiring事件和静默刷新token
-    //accessTokenExpiringNotificationTime: 5,
+    accessTokenExpiringNotificationTime: 5,
     //// 是否静默刷新访问令牌，如果含有offline_access的scope，则通过刷新令牌去重新获取访问令牌，
     //// 否则通过/authrize/token端点获取访问令牌（这样会导致ids的会话永不过期），解决方案是静默刷新token的间隔时间必须大于ids会话时间
     //// 如果是含有offline_access的scope，则把ids会话时间设置为和AbsoluteRefreshTokenLifetime一致

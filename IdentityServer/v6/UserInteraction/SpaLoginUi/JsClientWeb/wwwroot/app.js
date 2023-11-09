@@ -38,11 +38,11 @@ var config = {
     //// 是否静默刷新访问令牌，如果含有offline_access的scope，则通过刷新令牌去重新获取访问令牌，
     //// 否则通过/authrize/token端点获取访问令牌（这样会导致ids的会话永不过期），解决方案是静默刷新token的间隔时间必须大于ids会话时间
     //// 如果是含有offline_access的scope，则把ids会话时间设置为和AbsoluteRefreshTokenLifetime一致
-    //automaticSilentRenew: true,
+    automaticSilentRenew: true,
     //// 静默刷新令牌地址
     //silent_redirect_uri: "http://localhost:5003/silentrenew.html",
     //silent_redirect_uri: "http://a.ilng.cn:5003/silentrenew.html",
-    //silent_redirect_uri: "http://a.we.cn:5003/silentrenew.html",
+    silent_redirect_uri: "http://124.221.169.49:5003/silentrenew.html",
     //// 注销时撤销访问令牌
     //revokeAccessTokenOnSignout: true
 };
@@ -56,9 +56,9 @@ Oidc.Log.level = Oidc.Log.DEBUG;
 //mgr.events.addUserUnloaded(function () {
 //    console.log("User logged out locally");
 //});
-//mgr.events.addAccessTokenExpiring(function () {
-//    console.log("Access token expiring..." + new Date());
-//});
+mgr.events.addAccessTokenExpiring(function () {
+    console.log("Access token expiring..." + new Date());
+});
 //mgr.events.addAccessTokenExpired(function () {
 //    console.log("Access token expired." + new Date());
 
@@ -82,7 +82,7 @@ mgr.events.addSilentRenewError(function (err) {
 //});
 
 mgr.events.addUserSignedOut(function () {
-    //alert('Going out!');
+    alert('Going out!');
     console.log('UserSignedOut：', arguments);
     //mgr.signoutRedirect().then(function (resp) {
     //    console.log('signed out', resp);

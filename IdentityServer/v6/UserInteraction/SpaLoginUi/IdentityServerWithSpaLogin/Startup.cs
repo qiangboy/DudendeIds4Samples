@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace IdentityServerWithSpaLogin
 {
@@ -33,6 +34,8 @@ namespace IdentityServerWithSpaLogin
                 options.UserInteraction.LogoutUrl = "/logout.html";
                 options.UserInteraction.ErrorUrl = "/error.html"; 
                 
+                options.Authentication.CookieLifetime = TimeSpan.FromSeconds(30);
+
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;

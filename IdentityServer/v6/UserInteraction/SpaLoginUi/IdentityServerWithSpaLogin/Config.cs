@@ -3,6 +3,7 @@
 
 
 using Duende.IdentityServer.Models;
+using IdentityModel;
 using System.Collections.Generic;
 
 namespace IdentityServerWithSpaLogin
@@ -22,18 +23,25 @@ namespace IdentityServerWithSpaLogin
                 // interactive client using code flow + pkce
                 new Client
                 {
-                    ClientId = "interactive",
-                    ClientSecrets = { new Secret("49C1A7E1-0C79-4A89-A3D6-A37998FB86B0".Sha256()) },
+                    ClientId = "test",
+                    ClientName= "test",
+                    RequirePkce = true,
+                    RequireClientSecret = false,
                     
                     AllowedGrantTypes = GrantTypes.Code,
 
-                    RequireConsent = true,
+                    AllowAccessTokensViaBrowser = true,
+                    AllowOfflineAccess = true,
 
-                    RedirectUris = { "https://localhost:44300/signin-oidc" },
-                    FrontChannelLogoutUri = "https://localhost:44300/signout-oidc",
-                    PostLogoutRedirectUris = { "https://localhost:44300/signout-callback-oidc" },
+                    AccessTokenLifetime = 15,
 
-                    AllowedScopes = { "openid", "profile" }
+                    RequireConsent = false,
+
+                    RedirectUris = { "http://localhost:5003/callback.html", "http://localhost:5003/silentrenew.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5003/index.html" },
+                    AllowedCorsOrigins = { "http://localhost:5003" },
+
+                    AllowedScopes = { "openid", "profile", OidcConstants.StandardScopes.OfflineAccess }
                 },
             };
     }

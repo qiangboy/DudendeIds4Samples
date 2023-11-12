@@ -19,14 +19,13 @@ document.getElementById("logout").addEventListener("click", logout, false);
 
 var config = {
     authority: "http://124.221.169.49:5000",
+    //authority: "http://localhost:5000",
     client_id: "test",
     //redirect_uri: "http://localhost:5003/callback.html",
     redirect_uri: "http://124.221.169.49:5003/callback.html",
     //redirect_uri: "http://4ygtt367.dongtaiyuming.net:22370/callback.html",
     response_type: "code",
-    //response_type: "id_token token",
-    scope: "openid profile ms.shop offline_access",
-    //scope: "openid profile",
+    scope: "openid profile ms.product ms.order offline_access",
     //post_logout_redirect_uri: "http://localhost:5003/index.html",
     post_logout_redirect_uri: "http://124.221.169.49:5003/index.html",
     //post_logout_redirect_uri: "http://4ygtt367.dongtaiyuming.net:22370/index.html",
@@ -107,6 +106,7 @@ function apiProduct() {
     // 调用方法时，如果token已经过期，也会触发AccessTokenExpired事件
     mgr.getUser().then(function (user) {
         var url = "http://124.221.169.49:5101/api/product";
+        //var url = "http://localhost:5101/api/product";
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
@@ -126,6 +126,7 @@ function apiProduct() {
 function apiOrder() {
     mgr.getUser().then(function (user) {
         var url = "http://124.221.169.49:5102/api/order";
+        //var url = "http://localhost:5102/api/order";
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
@@ -138,7 +139,7 @@ function apiOrder() {
         xhr.setRequestHeader("Authorization", "Bearer " + user.access_token);
         xhr.setRequestHeader("Content-Type", "application/json");
 
-        xhr.send(requestBody);
+        xhr.send();
     });
 }
 

@@ -13,13 +13,11 @@ function log() {
 }
 
 document.getElementById("login").addEventListener("click", login, false);
-document.getElementById("api").addEventListener("click", api, false);
+document.getElementById("api-product").addEventListener("click", apiProduct, false);
+document.getElementById("api-order").addEventListener("click", apiOrder, false);
 document.getElementById("logout").addEventListener("click", logout, false);
 
 var config = {
-    //authority: "http://msdev-login.ilng.cn:30080",
-    //authority: "http://localhost:7008",
-    //authority: "http://a.ilng.cn:7008",
     authority: "http://124.221.169.49:5000",
     client_id: "test",
     //redirect_uri: "http://localhost:5003/callback.html",
@@ -27,7 +25,7 @@ var config = {
     //redirect_uri: "http://4ygtt367.dongtaiyuming.net:22370/callback.html",
     response_type: "code",
     //response_type: "id_token token",
-    scope: "openid profile offline_access",
+    scope: "openid profile ms.shop offline_access",
     //scope: "openid profile",
     //post_logout_redirect_uri: "http://localhost:5003/index.html",
     post_logout_redirect_uri: "http://124.221.169.49:5003/index.html",
@@ -41,7 +39,6 @@ var config = {
     automaticSilentRenew: true,
     //// 静默刷新令牌地址
     //silent_redirect_uri: "http://localhost:5003/silentrenew.html",
-    //silent_redirect_uri: "http://a.ilng.cn:5003/silentrenew.html",
     silent_redirect_uri: "http://124.221.169.49:5003/silentrenew.html",
     //// 注销时撤销访问令牌
     //revokeAccessTokenOnSignout: true
@@ -106,32 +103,13 @@ function login() {
     mgr.signinRedirect();
 }
 
-function api() {
+function apiProduct() {
     // 调用方法时，如果token已经过期，也会触发AccessTokenExpired事件
-    //mgr.getUser().then(function (user) {
-    //    var url = "http://localhost:5110/WeatherForecast";
-
-    //    var xhr = new XMLHttpRequest();
-    //    xhr.open("GET", url);
-    //    xhr.onload = function () {
-    //        log(xhr.status, JSON.parse(xhr.responseText));
-    //        console.log(JSON.parse(xhr.responseText));
-    //    }
-    //    xhr.setRequestHeader("Authorization", "Bearer " + user.access_token);
-    //    xhr.send();
-    //});
-
     mgr.getUser().then(function (user) {
-        var url = "http://msdev-auth.ilng.cn:30080/ms/ipcs/user/getselectorlist";
-        url = "http://msdev.ilng.cn:30080/ms/ipcs/system/getuserinfo";
-        //url = "http://localhost:6001/api/system/getuserinfo";
-        //url = "http://10.96.179.61:7001/api/system/getuserinfo";
-        //url = "http://10.96.179.31:7000/ms/ipcs/system/getuserinfo";
-        //url = "http://localhost:7008/api/Client/GetPageList";
-        //url = "http://msdev-auth.ilng.cn:30080/ms/iids/Client/GetPageList";
+        var url = "http://124.221.169.49:5101/api/product";
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", url);
+        xhr.open("GET", url);
         xhr.onload = function () {
             log(xhr.status, JSON.parse(xhr.responseText));
             console.log(JSON.parse(xhr.responseText));
@@ -141,16 +119,25 @@ function api() {
         xhr.setRequestHeader("Authorization", "Bearer " + user.access_token);
         xhr.setRequestHeader("Content-Type", "application/json");
 
-        var data = {
-            "keyword": "",
-            "entity": {
-            },
-            "pagination": {
-                "pageSize": 10,
-                "current": 1
-            }
+        xhr.send();
+    });
+}
+
+function apiOrder() {
+    mgr.getUser().then(function (user) {
+        var url = "http://124.221.169.49:5102/api/order";
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.onload = function () {
+            log(xhr.status, JSON.parse(xhr.responseText));
+            console.log(JSON.parse(xhr.responseText));
         }
-        var requestBody = JSON.stringify(data); // 替换为实际的JSON数据
+
+        xhr.withCredentials = true; // 启用跨域请求携带Cookie
+        xhr.setRequestHeader("Authorization", "Bearer " + user.access_token);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
         xhr.send(requestBody);
     });
 }

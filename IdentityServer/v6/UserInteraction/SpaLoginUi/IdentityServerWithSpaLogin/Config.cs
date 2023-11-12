@@ -17,6 +17,26 @@ namespace IdentityServerWithSpaLogin
                 new IdentityResources.Profile(),
             };
 
+        public static IEnumerable<ApiResource> ApiResources =>
+            new ApiResource[]
+            {
+                new ApiResource("ms.shop", "电商微服务作用域")
+                {
+                    Scopes =
+                    {
+                        "ms.product",
+                        "ms.order"
+                    }
+                }
+            };
+
+        public static IEnumerable<ApiScope> ApiScopes =>
+            new ApiScope[]
+            {
+                new ApiScope("ms.product", "产品服务"),
+                new ApiScope("ms.order", "订单服务")
+            };
+
         public static IEnumerable<Client> Clients =>
             new Client[]
             {
@@ -51,7 +71,7 @@ namespace IdentityServerWithSpaLogin
                     PostLogoutRedirectUris = { "http://124.221.169.49:5003/index.html", "http://4ygtt367.dongtaiyuming.net:22370/index.html" },
                     AllowedCorsOrigins = { "http://124.221.169.49:5003", "http://4ygtt367.dongtaiyuming.net:22370" },
 
-                    AllowedScopes = { "openid", "profile", OidcConstants.StandardScopes.OfflineAccess }
+                    AllowedScopes = { "openid", "profile", "ms.shop", OidcConstants.StandardScopes.OfflineAccess }
                 },
             };
     }

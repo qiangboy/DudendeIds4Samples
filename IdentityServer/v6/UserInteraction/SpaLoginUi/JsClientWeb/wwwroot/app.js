@@ -111,8 +111,7 @@ function apiProduct() {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
         xhr.onload = function () {
-            log(xhr.status, JSON.parse(xhr.responseText));
-            console.log(JSON.parse(xhr.responseText));
+            log(xhr.status, xhr.responseText);
         }
 
         xhr.withCredentials = true; // 启用跨域请求携带Cookie
@@ -131,8 +130,7 @@ function apiOrder() {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
         xhr.onload = function () {
-            log(xhr.status, JSON.parse(xhr.responseText));
-            console.log(JSON.parse(xhr.responseText));
+            log(xhr.status, xhr.responseText);
         }
 
         xhr.withCredentials = true; // 启用跨域请求携带Cookie

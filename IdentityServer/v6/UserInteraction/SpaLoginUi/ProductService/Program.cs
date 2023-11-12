@@ -10,7 +10,7 @@ builder.Services
     .AddJwtBearer(options =>
     {
         //options.Authority = "http://localhost:5000";
-        options.Authority = "http://124.221.169.49:5100";
+        options.Authority = "http://124.221.169.49:5000";
         options.Audience = "ms.shop";
         options.RequireHttpsMetadata = false;
     });

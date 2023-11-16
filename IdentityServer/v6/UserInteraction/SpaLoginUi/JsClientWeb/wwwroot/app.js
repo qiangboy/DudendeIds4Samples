@@ -18,16 +18,16 @@ document.getElementById("api-order").addEventListener("click", apiOrder, false);
 document.getElementById("logout").addEventListener("click", logout, false);
 
 var config = {
-    authority: "http://124.221.169.49:5000",
-    //authority: "http://localhost:5000",
+    //authority: "http://124.221.169.49:5000",
+    authority: "http://localhost:5000",
     client_id: "test",
-    //redirect_uri: "http://localhost:5003/callback.html",
-    redirect_uri: "http://124.221.169.49:5003/callback.html",
+    redirect_uri: "http://localhost:5003/callback.html",
+    //redirect_uri: "http://124.221.169.49:5003/callback.html",
     //redirect_uri: "http://4ygtt367.dongtaiyuming.net:22370/callback.html",
     response_type: "code",
-    scope: "openid profile ms.product ms.order offline_access",
-    //post_logout_redirect_uri: "http://localhost:5003/index.html",
-    post_logout_redirect_uri: "http://124.221.169.49:5003/index.html",
+    scope: "openid profile ms.product offline_access",
+    post_logout_redirect_uri: "http://localhost:5003/index.html",
+    //post_logout_redirect_uri: "http://124.221.169.49:5003/index.html",
     //post_logout_redirect_uri: "http://4ygtt367.dongtaiyuming.net:22370/index.html",
     // 访问令牌提前通知时间，以触发AccessTokenExpiring事件和静默刷新token
     // 如果访问令牌的有效期是20秒，则每20-10=10秒触发一次AccessTokenExpiring事件和静默刷新token
@@ -37,10 +37,11 @@ var config = {
     //// 如果是含有offline_access的scope，则把ids会话时间设置为和AbsoluteRefreshTokenLifetime一致
     automaticSilentRenew: true,
     //// 静默刷新令牌地址
-    //silent_redirect_uri: "http://localhost:5003/silentrenew.html",
-    silent_redirect_uri: "http://124.221.169.49:5003/silentrenew.html",
+    silent_redirect_uri: "http://localhost:5003/silentrenew.html",
+    //silent_redirect_uri: "http://124.221.169.49:5003/silentrenew.html",
     //// 注销时撤销访问令牌
-    //revokeAccessTokenOnSignout: true
+    //revokeAccessTokenOnSignout: true,
+    monitorSession: false
 };
 var mgr = new Oidc.UserManager(config);
 Oidc.Log.logger = console;
@@ -105,8 +106,8 @@ function login() {
 function apiProduct() {
     // 调用方法时，如果token已经过期，也会触发AccessTokenExpired事件
     mgr.getUser().then(function (user) {
-        var url = "http://124.221.169.49:5101/api/product";
-        //var url = "http://localhost:5101/api/product";
+        //var url = "http://124.221.169.49:5101/api/product";
+        var url = "http://localhost:5101/api/product";
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
@@ -124,8 +125,8 @@ function apiProduct() {
 
 function apiOrder() {
     mgr.getUser().then(function (user) {
-        var url = "http://124.221.169.49:5102/api/order";
-        //var url = "http://localhost:5102/api/order";
+        //var url = "http://124.221.169.49:5102/api/order";
+        var url = "http://localhost:5102/api/order";
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);

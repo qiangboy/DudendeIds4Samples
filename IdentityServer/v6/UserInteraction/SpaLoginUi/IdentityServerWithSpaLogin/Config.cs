@@ -27,7 +27,14 @@ namespace IdentityServerWithSpaLogin
                         "ms.product",
                         "ms.order"
                     }
-                }
+                },
+                new ApiResource("ms.product", "电商微服务作用域")
+                {
+                    Scopes =
+                    {
+                        "ms.product"
+                    }
+                },
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>

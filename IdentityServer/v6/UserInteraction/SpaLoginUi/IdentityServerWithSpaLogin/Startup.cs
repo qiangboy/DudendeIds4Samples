@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Linq;
 using System.Reflection;
+using Microsoft.AspNetCore.Http;
 
 namespace IdentityServerWithSpaLogin
 {
@@ -54,6 +55,8 @@ namespace IdentityServerWithSpaLogin
 
                     // see https://docs.duendesoftware.com/identityserver/v5/fundamentals/resources/
                     options.EmitStaticAudienceClaim = true;
+
+                    options.Authentication.CookieSameSiteMode = SameSiteMode.Lax;
                 })
                 .AddTestUsers(TestUsers.Users)
                 .AddConfigurationStore(options =>

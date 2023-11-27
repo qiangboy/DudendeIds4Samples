@@ -80,6 +80,8 @@ namespace IdentityServerWithSpaLogin
         {
             InitializeDatabase(app);
 
+            app.UseIdentityServerOrigin();
+
             if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

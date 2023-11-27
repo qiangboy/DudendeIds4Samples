@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: IdentityServerWithSpaLogin/Dockerfile
     depends_on:
-      - docker.mysql
+      - mysql
     networks:
       - mynet
 
@@ -38,14 +38,16 @@ services:
       - mynet
 
 
-  docker.mysql:
-    hostname: docker.mysql
+  mysql:
+    hostname: mysql
     image: mysql:latest
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_USER: test
       MYSQL_PASSWORD: 123456
+    ports:
+      - "3306:3306"
     volumes:
       - ./mysql_data:/var/lib/mysql
     networks:

@@ -8,12 +8,16 @@ services:
       dockerfile: IdentityServerWithSpaLogin/Dockerfile
     depends_on:
       - mysql
+    networks:
+      - mynet
 
   jsclientweb:
     image: ${DOCKER_REGISTRY-}jsclientweb
     build:
       context: .
       dockerfile: JsClientWeb/Dockerfile
+    networks:
+      - mynet
 
 
   productservice:
@@ -21,6 +25,8 @@ services:
     build:
       context: .
       dockerfile: ProductService/Dockerfile
+    networks:
+      - mynet
 
 
   orderservice:
@@ -28,6 +34,8 @@ services:
     build:
       context: .
       dockerfile: OrderService/Dockerfile
+    networks:
+      - mynet
 
 
   mysql:
@@ -40,4 +48,11 @@ services:
       MYSQL_PASSWORD: 123456
     volumes:
       - ./mysql_data:/var/lib/mysql
+    networks:
+      - mynet
+
+
+networks:
+  mynet:
+    driver: bridge
 

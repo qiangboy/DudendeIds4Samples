@@ -13,7 +13,7 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductService", "ProductService\ProductService.csproj", "{7D908002-47F8-43C7-BD53-C134602DC4CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderService", "OrderService\OrderService.csproj", "{0753BF93-B38E-43E0-98DF-35CA60ABB29E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService", "OrderService\OrderService.csproj", "{0753BF93-B38E-43E0-98DF-35CA60ABB29E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,7 +34,6 @@ Global
 		{3CAF98C0-7C3C-4784-BD75-2C8B38D7F7B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CAF98C0-7C3C-4784-BD75-2C8B38D7F7B7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3C5BF3F2-DD7E-40BB-A61C-A0DAAD37118F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C5BF3F2-DD7E-40BB-A61C-A0DAAD37118F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C5BF3F2-DD7E-40BB-A61C-A0DAAD37118F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C5BF3F2-DD7E-40BB-A61C-A0DAAD37118F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7D908002-47F8-43C7-BD53-C134602DC4CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

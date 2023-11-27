@@ -2,13 +2,18 @@
 // See LICENSE in the project root for license information.
 
 
+using IdentityServer4.EntityFramework.DbContexts;
+using IdentityServer4.EntityFramework.Mappers;
 using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Linq;
+using System.Reflection;
 
 namespace IdentityServerWithSpaLogin
 {
@@ -27,36 +32,51 @@ namespace IdentityServerWithSpaLogin
         {
             services.AddControllersWithViews();
 
-            var builder = services.AddIdentityServer(options =>
-            {
-                options.UserInteraction.LoginUrl = "/login.html";
-                options.UserInteraction.ConsentUrl = "/consent.html";
-                options.UserInteraction.LogoutUrl = "/logout.html";
-                options.UserInteraction.ErrorUrl = "/error.html"; 
-                
-                options.Authentication.CookieLifetime = TimeSpan.FromSeconds(30);
+            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+            var connectionString = Configuration["ConnectionStrings:Ids4"];
 
-                options.Events.RaiseErrorEvents = true;
-                options.Events.RaiseInformationEvents = true;
-                options.Events.RaiseFailureEvents = true;
-                options.Events.RaiseSuccessEvents = true;
+            services.AddIdentityServer(options =>
+                {
+                    options.UserInteraction.LoginUrl = "/login.html";
+                    options.UserInteraction.ConsentUrl = "/consent.html";
+                    options.UserInteraction.LogoutUrl = "/logout.html";
+                    options.UserInteraction.ErrorUrl = "/error.html";
 
-                // see https://docs.duendesoftware.com/identityserver/v5/fundamentals/resources/
-                options.EmitStaticAudienceClaim = true;
-            })
-                .AddTestUsers(TestUsers.Users);
+                    options.Authentication.CookieLifetime = TimeSpan.FromSeconds(30);
+
+                    options.Events.RaiseErrorEvents = true;
+                    options.Events.RaiseInformationEvents = true;
+                    options.Events.RaiseFailureEvents = true;
+                    options.Events.RaiseSuccessEvents = true;
+
+                    // see https://docs.duendesoftware.com/identityserver/v5/fundamentals/resources/
+                    options.EmitStaticAudienceClaim = true;
+                })
+                .AddTestUsers(TestUsers.Users)
+                .AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = b => b.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
+                        sql => sql.MigrationsAssembly(migrationsAssembly));
+                })
+                .AddOperationalStore(options =>
+                {
+                    options.ConfigureDbContext = b => b.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
+                        sql => sql.MigrationsAssembly(migrationsAssembly));
+                });
 
             // in-memory, code config
-            builder.AddInMemoryIdentityResources(Config.IdentityResources);
-            builder.AddInMemoryClients(Config.Clients);
-            builder.AddInMemoryApiResources(Config.ApiResources);
-            builder.AddInMemoryApiScopes(Config.ApiScopes);
+            //builder.AddInMemoryIdentityResources(Config.IdentityResources);
+            //builder.AddInMemoryClients(Config.Clients);
+            //builder.AddInMemoryApiResources(Config.ApiResources);
+            //builder.AddInMemoryApiScopes(Config.ApiScopes);
 
             services.ConfigureNonBreakingSameSiteCookies();
         }
 
         public void Configure(IApplicationBuilder app)
         {
+            InitializeDatabase(app);
+
             if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -74,6 +94,41 @@ namespace IdentityServerWithSpaLogin
             {
                 endpoints.MapDefaultControllerRoute();
             });
+        }
+
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            using var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
+            serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+
+            var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+            context.Database.Migrate();
+            if (!context.Clients.Any())
+            {
+                foreach (var client in Config.Clients)
+                {
+                    context.Clients.Add(client.ToEntity());
+                }
+                context.SaveChanges();
+            }
+
+            if (!context.IdentityResources.Any())
+            {
+                foreach (var resource in Config.IdentityResources)
+                {
+                    context.IdentityResources.Add(resource.ToEntity());
+                }
+                context.SaveChanges();
+            }
+
+            if (!context.ApiScopes.Any())
+            {
+                foreach (var resource in Config.ApiScopes)
+                {
+                    context.ApiScopes.Add(resource.ToEntity());
+                }
+                context.SaveChanges();
+            }
         }
     }
 }

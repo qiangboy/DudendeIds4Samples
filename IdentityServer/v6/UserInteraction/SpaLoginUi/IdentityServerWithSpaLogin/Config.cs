@@ -2,8 +2,8 @@
 // See LICENSE in the project root for license information.
 
 
-using Duende.IdentityServer.Models;
 using IdentityModel;
+using IdentityServer4.Models;
 using System.Collections.Generic;
 
 namespace IdentityServerWithSpaLogin

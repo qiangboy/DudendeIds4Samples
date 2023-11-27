@@ -1,8 +1,7 @@
-using Duende.IdentityServer;
-using Duende.IdentityServer.Extensions;
-using Duende.IdentityServer.Models;
-using Duende.IdentityServer.Services;
-using Duende.IdentityServer.Test;
+using IdentityServer4;
+using IdentityServer4.Models;
+using IdentityServer4.Services;
+using IdentityServer4.Test;
 using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Cors;
@@ -45,13 +44,13 @@ namespace IdentityServerHost.Spa
     public class SpaEndpoints : ControllerBase
     {
         private readonly IIdentityServerInteractionService _interaction;
-        private readonly IServerUrls _serverUrls;
+        // private readonly IServerUrls _serverUrls;
         private readonly TestUserStore _users;
 
-        public SpaEndpoints(IIdentityServerInteractionService interaction, IServerUrls serverUrls)
+        public SpaEndpoints(IIdentityServerInteractionService interaction/*, IServerUrls serverUrls*/)
         {
             _interaction = interaction;
-            _serverUrls = serverUrls;
+            // _serverUrls = serverUrls;
             _users = new TestUserStore(TestUsers.Users);
         }
 
@@ -90,7 +89,7 @@ namespace IdentityServerHost.Spa
                 }
                 else
                 {
-                    response.ValidReturnUrl = _serverUrls.BaseUrl;
+                    response.ValidReturnUrl = "";// _serverUrls.BaseUrl;
                 }
 
                 var user = _users.FindByUsername(model.Username);

@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: IdentityServerWithSpaLogin/Dockerfile
+    depends_on:
+      - mysql
 
   jsclientweb:
     image: ${DOCKER_REGISTRY-}jsclientweb
@@ -26,4 +28,15 @@ services:
     build:
       context: .
       dockerfile: OrderService/Dockerfile
+
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_USER: test
+      MYSQL_PASSWORD: 123456
+    volumes:
+      - ./mysql_data:/var/lib/mysql
 

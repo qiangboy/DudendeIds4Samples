@@ -40,6 +40,7 @@ services:
 
   mysql:
     hostname: mysql
+    container_name: mysql
     image: mysql:latest
     restart: always
     environment:

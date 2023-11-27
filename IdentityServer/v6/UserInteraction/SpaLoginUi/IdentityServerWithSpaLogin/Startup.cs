@@ -46,6 +46,8 @@ namespace IdentityServerWithSpaLogin
                     options.UserInteraction.LogoutUrl = "/logout.html";
                     options.UserInteraction.ErrorUrl = "/error.html";
 
+                    options.IssuerUri = Configuration["AuthServer:Authority"];
+
                     options.Authentication.CookieLifetime = TimeSpan.FromSeconds(30);
 
                     options.Events.RaiseErrorEvents = true;

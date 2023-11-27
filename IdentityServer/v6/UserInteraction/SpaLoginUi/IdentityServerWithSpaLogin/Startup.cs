@@ -15,7 +15,9 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Linq;
 using System.Reflection;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
+using StackExchange.Redis;
 
 namespace IdentityServerWithSpaLogin
 {
@@ -92,6 +94,11 @@ namespace IdentityServerWithSpaLogin
             });
 
             services.ConfigureNonBreakingSameSiteCookies();
+
+            var redis = ConnectionMultiplexer.Connect(Configuration["Redis:Configuration"]);
+            services.AddDataProtection()
+                .SetApplicationName(Configuration["Redis:ApplicationName"])
+                .PersistKeysToStackExchangeRedis(redis, "DataProtection-Keys");
         }
 
         public void Configure(IApplicationBuilder app)

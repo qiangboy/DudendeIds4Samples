@@ -21,6 +21,7 @@ services:
     depends_on:
       - mysql
       - nginx
+      - redis
     networks:
       - mynet
 

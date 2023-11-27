@@ -35,6 +35,8 @@ namespace IdentityServerWithSpaLogin
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             var connectionString = Configuration["ConnectionStrings:Ids4"];
 
+            Console.WriteLine(connectionString);
+
             services.AddIdentityServer(options =>
                 {
                     options.UserInteraction.LoginUrl = "/login.html";

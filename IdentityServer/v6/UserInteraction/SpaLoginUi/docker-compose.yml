@@ -38,8 +38,8 @@ services:
       - mynet
 
 
-  mysql:
-    hostname: mysql
+  docker.mysql:
+    hostname: docker.mysql
     image: mysql:latest
     restart: always
     environment:

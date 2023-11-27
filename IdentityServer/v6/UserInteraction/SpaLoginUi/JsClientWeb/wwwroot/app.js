@@ -106,8 +106,8 @@ function login() {
 function apiProduct() {
     // 调用方法时，如果token已经过期，也会触发AccessTokenExpired事件
     mgr.getUser().then(function (user) {
-        //var url = "http://124.221.169.49:5101/api/product";
-        var url = "http://localhost:5101/api/product";
+        var url = "http://124.221.169.49:5101/api/product";
+        // var url = "http://localhost:5101/api/product";
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
@@ -125,8 +125,8 @@ function apiProduct() {
 
 function apiOrder() {
     mgr.getUser().then(function (user) {
-        //var url = "http://124.221.169.49:5102/api/order";
-        var url = "http://localhost:5102/api/order";
+        var url = "http://124.221.169.49:5102/api/order";
+        //var url = "http://localhost:5102/api/order";
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);

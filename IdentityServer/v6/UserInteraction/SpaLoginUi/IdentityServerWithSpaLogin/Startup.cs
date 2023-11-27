@@ -64,7 +64,8 @@ namespace IdentityServerWithSpaLogin
                 {
                     options.ConfigureDbContext = b => b.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
                         sql => sql.MigrationsAssembly(migrationsAssembly));
-                });
+                })
+                .AddDeveloperSigningCredential();
 
             // in-memory, code config
             //builder.AddInMemoryIdentityResources(Config.IdentityResources);

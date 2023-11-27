@@ -13,6 +13,8 @@ builder.Services
         options.Authority = "http://124.221.169.49:5000";
         options.Audience = "ms.shop";
         options.RequireHttpsMetadata = false;
+
+        options.TokenValidationParameters.ValidateAudience = false;
     });
 
 builder.Services.AddAuthorization();

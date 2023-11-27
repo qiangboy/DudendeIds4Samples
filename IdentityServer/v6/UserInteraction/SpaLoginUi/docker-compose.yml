@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: IdentityServerWithSpaLogin/Dockerfile
     depends_on:
-      - mysql
+      - docker.mysql
     networks:
       - mynet
 

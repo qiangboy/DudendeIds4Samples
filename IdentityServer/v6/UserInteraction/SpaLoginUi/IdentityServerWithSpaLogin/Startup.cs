@@ -74,6 +74,17 @@ namespace IdentityServerWithSpaLogin
             //builder.AddInMemoryApiResources(Config.ApiResources);
             //builder.AddInMemoryApiScopes(Config.ApiScopes);
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                    });
+            });
+
             services.ConfigureNonBreakingSameSiteCookies();
         }
 
@@ -99,6 +110,7 @@ namespace IdentityServerWithSpaLogin
             app.UseCookiePolicy();
 
             app.UseRouting();
+            app.UseCors("AllowAllOrigins");
             app.UseIdentityServer();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

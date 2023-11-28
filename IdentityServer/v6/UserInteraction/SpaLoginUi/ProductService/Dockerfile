@@ -19,7 +19,7 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
+ENV ASPNETCORE_DEFAULT_ENCODING utf-8
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT false
 
 ENTRYPOINT ["dotnet", "ProductService.dll"]

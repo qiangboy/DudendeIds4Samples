@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  identityserverwithspalogin1:
+  ids-1:
     container_name: ids-1
     image: ${DOCKER_REGISTRY-}identityserverwithspalogin
     build:
@@ -14,7 +14,7 @@ services:
     networks:
       - mynet
 
-  identityserverwithspalogin2:
+  ids-2:
     container_name: ids-2
     image: ${DOCKER_REGISTRY-}identityserverwithspalogin
     build:
@@ -62,14 +62,6 @@ services:
     container_name: mysql
     image: mysql:latest
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_USER: test
-      MYSQL_PASSWORD: 123456
-    # ports:
-    #   - "3306:3306"
-    volumes:
-      - ./mysql_data:/var/lib/mysql
     networks:
       - mynet
 
@@ -78,10 +70,6 @@ services:
     container_name: nginx
     image: nginx
     restart: always
-    ports:
-      - 5000:80
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
     networks:
       - mynet
 
@@ -90,11 +78,6 @@ services:
     container_name: redis
     image: redis:latest
     restart: always
-    command: redis-server --requirepass 123456
-    # ports:
-    #   - 6379:6379
-    volumes:
-      - ./redis_data:/data
     networks:
       - mynet
 

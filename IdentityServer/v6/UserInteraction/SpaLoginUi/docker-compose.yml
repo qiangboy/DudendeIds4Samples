@@ -9,7 +9,7 @@ services:
       dockerfile: IdentityServerWithSpaLogin/Dockerfile
     depends_on:
       - mysql
-      - nginx
+      - nginx-for-ids
       - redis
     networks:
       - mynet
@@ -22,7 +22,7 @@ services:
       dockerfile: IdentityServerWithSpaLogin/Dockerfile
     depends_on:
       - mysql
-      - nginx
+      - nginx-for-ids
       - redis
     networks:
       - mynet
@@ -34,6 +34,8 @@ services:
     build:
       context: .
       dockerfile: JsClientWeb/Dockerfile
+    depends_on:
+      - nginx-for-client
     networks:
       - mynet
 
@@ -44,6 +46,8 @@ services:
     build:
       context: .
       dockerfile: ProductService/Dockerfile
+    depends_on:
+      - nginx-for-api-gateway
     networks:
       - mynet
 
@@ -54,6 +58,8 @@ services:
     build:
       context: .
       dockerfile: OrderService/Dockerfile
+    depends_on:
+      - nginx-for-api-gateway
     networks:
       - mynet
 
@@ -66,8 +72,24 @@ services:
       - mynet
 
 
-  nginx:
-    container_name: nginx
+  nginx-for-ids:
+    container_name: nginx-for-ids
+    image: nginx
+    restart: always
+    networks:
+      - mynet
+
+
+  nginx-for-client:
+    container_name: nginx-for-client
+    image: nginx
+    restart: always
+    networks:
+      - mynet
+
+
+  nginx-for-api-gateway:
+    container_name: nginx-for-api-gateway
     image: nginx
     restart: always
     networks:

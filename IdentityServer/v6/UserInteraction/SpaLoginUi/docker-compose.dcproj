@@ -14,6 +14,8 @@
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
-    <None Include="nginx.conf" />
+    <None Include="nginx-for-api-gateway-config\nginx.conf" />
+    <None Include="nginx-for-client-config\nginx.conf" />
+    <None Include="nginx-for-ids-config\nginx.conf" />
   </ItemGroup>
 </Project>

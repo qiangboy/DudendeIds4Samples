@@ -1,20 +1,20 @@
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
-
-System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-Console.OutputEncoding = System.Text.Encoding.UTF8;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("zh-CN", true)
+{
+    DateTimeFormat = {
+          ShortDatePattern = "yyyy-MM-dd",
+          FullDateTimePattern = "yyyy-MM-dd HH:mm:ss",
+          LongTimePattern = "HH:mm:ss"
+        }
+};
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddControllers().AddJsonOptions(options =>
-{
-    options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
-});
 
 builder.Services
     .AddAuthentication("Bearer")

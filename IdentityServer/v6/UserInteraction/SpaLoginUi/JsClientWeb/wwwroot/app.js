@@ -24,7 +24,7 @@ var config = {
     //redirect_uri: "http://localhost:5003/callback.html",
     redirect_uri: "http://124.221.169.49:5003/callback.html",
     response_type: "code",
-    scope: "openid profile ms.product offline_access",
+    scope: "openid profile ms.product", // offline_access",
     //post_logout_redirect_uri: "http://localhost:5003/index.html",
     post_logout_redirect_uri: "http://124.221.169.49:5003/index.html",
     // 访问令牌提前通知时间，以触发AccessTokenExpiring事件和静默刷新token
@@ -39,7 +39,7 @@ var config = {
     silent_redirect_uri: "http://124.221.169.49:5003/silentrenew.html",
     //// 注销时撤销访问令牌
     //revokeAccessTokenOnSignout: true,
-    monitorSession: false
+    monitorSession: true
 };
 var mgr = new Oidc.UserManager(config);
 Oidc.Log.logger = console;
@@ -54,36 +54,45 @@ Oidc.Log.level = Oidc.Log.DEBUG;
 mgr.events.addAccessTokenExpiring(function () {
     console.log("Access token expiring..." + new Date());
 });
-//mgr.events.addAccessTokenExpired(function () {
-//    console.log("Access token expired." + new Date());
+mgr.events.addAccessTokenExpired(function () {
+    console.log('访问令牌已过期，开始静默刷新');
 
-//    if (confirm("由于你长时间未操作，身份信息已过期，请重新登录！")) {
-//        mgr.signinRedirect();
-//    } else {
-//        console.log("停在此页面");
-//    }
-
-//});
-mgr.events.addSilentRenewError(function (err) {
-    console.log("Silent renew error: " + err.message);
+    userManager.signinSilent();
 });
-//mgr.events.addUserSignedIn(function () {
-//    console.log("用户已登录 ")
-//});
 
-//mgr.events.addUserSignedOut(function () {
-//    console.log("User signed out of OP");
-//    mgr.removeUser();
-//});
+mgr.events.addSilentRenewError(function (err) {
+    console.error('静默刷新失败:', err);
 
-mgr.events.addUserSignedOut(function () {
-    alert('Going out!');
-    console.log('UserSignedOut：', arguments);
-    mgr.signoutRedirect().then(function (resp) {
-        console.log('signed out', resp);
-    }).catch(function (err) {
-        console.log(err)
-    })
+    // ids登录的session已过期
+    if (err.error === 'login_required') {
+        alert('身份信息已过期');
+        userManager.removeUser().then(() => {
+            alert('移除用户信息');
+            userManager.signinRedirect().catch((err) => {
+                console.log(err);
+            });
+        });
+    } else {
+        userManager
+            .signoutRedirect()
+            .then((resp) => {
+                console.log('signed out', resp);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+});
+
+mgr.events.addUserLoaded((user) => {
+    console.log('新的用户已加载:', user);
+});
+
+mgr.events.addUserSignedOut(() => {
+    alert('用户已注销登录');
+    userManager.signinRedirect().catch((err) => {
+        console.log(err);
+    });
 });
 
 mgr.getUser().then(function (user) {
@@ -93,7 +102,7 @@ mgr.getUser().then(function (user) {
     }
     else {
         log("User not logged in");
-        //login();
+        login();
     }
 });
 

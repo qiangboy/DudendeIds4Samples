@@ -75,12 +75,6 @@ namespace IdentityServerWithSpaLogin
                 })
                 .AddDeveloperSigningCredential();
 
-            // in-memory, code config
-            //builder.AddInMemoryIdentityResources(Config.IdentityResources);
-            //builder.AddInMemoryClients(Config.Clients);
-            //builder.AddInMemoryApiResources(Config.ApiResources);
-            //builder.AddInMemoryApiScopes(Config.ApiScopes);
-
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",

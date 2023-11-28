@@ -84,14 +84,19 @@ services:
     container_name: nginx-for-client
     image: nginx
     restart: always
+    depends_on:
+      - nginx-for-ids
     networks:
       - mynet
+
 
 
   nginx-for-api-gateway:
     container_name: nginx-for-api-gateway
     image: nginx
     restart: always
+    depends_on:
+      - nginx-for-ids
     networks:
       - mynet
 

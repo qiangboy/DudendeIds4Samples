@@ -18,4 +18,8 @@ RUN dotnet publish "OrderService.csproj" -c Release -o /app/publish /p:UseAppHos
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
 ENTRYPOINT ["dotnet", "OrderService.dll"]

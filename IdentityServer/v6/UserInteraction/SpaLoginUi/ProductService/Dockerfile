@@ -18,4 +18,8 @@ RUN dotnet publish "ProductService.csproj" -c Release -o /app/publish /p:UseAppH
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
 ENTRYPOINT ["dotnet", "ProductService.dll"]

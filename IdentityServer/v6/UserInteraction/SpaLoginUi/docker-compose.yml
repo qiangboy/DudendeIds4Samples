@@ -3,7 +3,7 @@ version: '3.4'
 services:
   ids-1:
     container_name: ids-1
-    image: ${DOCKER_REGISTRY-}identityserverwithspalogin
+    image: ids
     build:
       context: .
       dockerfile: IdentityServerWithSpaLogin/Dockerfile
@@ -16,7 +16,7 @@ services:
 
   ids-2:
     container_name: ids-2
-    image: ${DOCKER_REGISTRY-}identityserverwithspalogin
+    image: ids
     build:
       context: .
       dockerfile: IdentityServerWithSpaLogin/Dockerfile

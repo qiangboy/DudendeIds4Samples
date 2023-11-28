@@ -16,8 +16,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StackExchange.Redis;
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.ConstrainedExecution;
+using System.Security.Cryptography.X509Certificates;
 
 namespace IdentityServerWithSpaLogin
 {
@@ -39,7 +42,11 @@ namespace IdentityServerWithSpaLogin
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             var connectionString = Configuration["ConnectionStrings:Ids4"];
 
-            Console.WriteLine(connectionString);
+
+            // 项目根目录下的证书文件（证书使用openssl生成，有效期一年）
+            var pfxPath = Path.Combine(System.Environment.CurrentDirectory, Configuration["Certificates:CerPath"]);
+            // 生成X509证书
+            var cert = new X509Certificate2(pfxPath, Configuration["Certificates:Password"]);
 
             services.AddIdentityServer(options =>
                 {
@@ -73,7 +80,7 @@ namespace IdentityServerWithSpaLogin
                     options.ConfigureDbContext = b => b.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
                         sql => sql.MigrationsAssembly(migrationsAssembly));
                 })
-                .AddDeveloperSigningCredential();
+                .AddSigningCredential(cert);
 
             services.AddCors(options =>
             {

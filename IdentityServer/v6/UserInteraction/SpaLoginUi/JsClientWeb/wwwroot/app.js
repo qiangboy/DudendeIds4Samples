@@ -123,7 +123,6 @@ function apiProduct() {
 function apiOrder() {
     mgr.getUser().then(function (user) {
         var url = "http://124.221.169.49:5100/api/order";
-        //var url = "http://localhost:5102/api/order";
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);

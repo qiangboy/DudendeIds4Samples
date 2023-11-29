@@ -1,34 +1,33 @@
-/*
- * @Description  : 
- * @Author       : chenyuanfeng
- * @Date         : 2023-11-29 17:49:50
- * @LastEditors  : chenyuanfeng
- * @LastEditTime : 2023-11-29 18:03:48
- */
 import { UserManager, Log } from 'oidc-client';
-import userManagerSettings from '../oidc-client-config/defaultUserManagerSettings'
-
-let isDebug = import.meta.env.REACT_APP_DEBUG === 'true';
-let scope = `openid profile ms.ipcs ms.ifms ms.icms ms.idms ms.iros ${
-  isDebug ? 'offline_access' : ''
-}`;
-let authority = isDebug ? 'http://msdev-login.ilng.cn:30080' : 'http://localhost:7008';
+import userManagerSettings from '../oidc-client-config/defaultUserManagerSettings';
 
 const userManager = new UserManager({
   ...userManagerSettings,
-  authority,
+  authority: import.meta.env.VITE_AuthServer_Authority,
   client_id: 'test',
   redirect_uri: `${window.location.origin}/callback`,
   response_type: 'code',
-  scope,
+  scope: `openid profile ms.product${import.meta.env.DEV ? ' offline_access' : ''}`,
   post_logout_redirect_uri: window.location.origin,
   silent_redirect_uri: `${window.location.origin}/silentrenew`,
   accessTokenExpiringNotificationTime: 10,
   automaticSilentRenew: true,
-  monitorSession: !isDebug,
+  monitorSession: !import.meta.env.DEV,
 });
 
-console.log('UserManager:', userManager);
+console.log('UserManager:', {
+  ...userManagerSettings,
+  authority: import.meta.env.VITE_AuthServer_Authority,
+  client_id: 'test',
+  redirect_uri: `${window.location.origin}/callback`,
+  response_type: 'code',
+  scope: `openid profile ms.product${import.meta.env.DEV ? ' offline_access' : ''}`,
+  post_logout_redirect_uri: window.location.origin,
+  silent_redirect_uri: `${window.location.origin}/silentrenew`,
+  accessTokenExpiringNotificationTime: 10,
+  automaticSilentRenew: true,
+  monitorSession: !import.meta.env.DEV,
+});
 
 Log.logger = console;
 Log.level = Log.DEBUG;

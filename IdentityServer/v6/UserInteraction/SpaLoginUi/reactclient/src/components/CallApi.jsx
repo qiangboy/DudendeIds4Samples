@@ -7,14 +7,7 @@ const CallApi = () => {
 
   const callApi = () => {
     apiService
-      .post('ms/ipcs/role/getpagelist', {
-        keyword: '',
-        entity: {},
-        pagination: {
-          pageSize: 10,
-          current: 1,
-        },
-      })
+      .get('api/order')
       .then((response) => response.json()) // 处理响应的 JSON 数据
       .then((data) => {
         console.log('返回的数据：', data);

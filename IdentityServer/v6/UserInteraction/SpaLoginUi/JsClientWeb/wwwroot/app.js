@@ -39,7 +39,8 @@ var config = {
     silent_redirect_uri: "http://124.221.169.49:5003/silentrenew.html",
     //// 注销时撤销访问令牌
     //revokeAccessTokenOnSignout: true,
-    monitorSession: true
+    monitorSession: true,
+    userStore: new Oidc.WebStorageStateStore()
 };
 var mgr = new Oidc.UserManager(config);
 Oidc.Log.logger = console;

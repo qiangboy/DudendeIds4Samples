@@ -7,7 +7,7 @@
 <body>
 <script src="oidc-client.js"></script>
 <script>
-    new Oidc.UserManager({ response_mode: "query" }).signinSilentCallback().then(function () {
+    new Oidc.UserManager({ response_mode: "query", userStore: new Oidc.WebStorageStateStore() }).signinSilentCallback().then(function () {
         console.log("刷新token成功");
     }).catch(function (e) {
         console.error(e);

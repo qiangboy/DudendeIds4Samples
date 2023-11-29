@@ -3,7 +3,7 @@
  * @Author       : chenyuanfeng
  * @Date         : 2023-11-29 17:49:50
  * @LastEditors  : chenyuanfeng
- * @LastEditTime : 2023-11-29 18:03:21
+ * @LastEditTime : 2023-11-29 18:03:48
  */
 import { UserManager, Log } from 'oidc-client';
 import userManagerSettings from '../oidc-client-config/defaultUserManagerSettings'

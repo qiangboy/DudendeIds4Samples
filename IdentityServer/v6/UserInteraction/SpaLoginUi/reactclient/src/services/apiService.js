@@ -16,14 +16,14 @@ export class ApiService {
 
   setApiBaseUrl(url) {
     if (
-      !url.includes(process.env.REACT_APP_API_BASE_URL) &&
+      !url.includes(import.meta.env.REACT_APP_API_BASE_URL) &&
       url.startsWith('http')
     ) {
       throw Error('invalid url.');
     }
 
-    url = `${process.env.REACT_APP_API_BASE_URL.replace(/\/+$/, '')}/${url
-      .replace(process.env.REACT_APP_API_BASE_URL, '')
+    url = `${import.meta.env.REACT_APP_API_BASE_URL.replace(/\/+$/, '')}/${url
+      .replace(import.meta.env.REACT_APP_API_BASE_URL, '')
       .replace(/^\/+/, '')}`;
 
     return url;

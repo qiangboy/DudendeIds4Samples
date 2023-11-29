@@ -1,7 +1,14 @@
+/*
+ * @Description  : 
+ * @Author       : chenyuanfeng
+ * @Date         : 2023-11-29 17:49:50
+ * @LastEditors  : chenyuanfeng
+ * @LastEditTime : 2023-11-29 18:03:21
+ */
 import { UserManager, Log } from 'oidc-client';
 import userManagerSettings from '../oidc-client-config/defaultUserManagerSettings'
 
-let isDebug = process.env.REACT_APP_DEBUG === 'true';
+let isDebug = import.meta.env.REACT_APP_DEBUG === 'true';
 let scope = `openid profile ms.ipcs ms.ifms ms.icms ms.idms ms.iros ${
   isDebug ? 'offline_access' : ''
 }`;

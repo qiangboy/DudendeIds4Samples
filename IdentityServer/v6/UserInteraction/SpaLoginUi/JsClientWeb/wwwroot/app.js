@@ -57,7 +57,7 @@ mgr.events.addAccessTokenExpiring(function () {
 mgr.events.addAccessTokenExpired(function () {
     console.log('访问令牌已过期，开始静默刷新');
 
-    userManager.signinSilent();
+    mgr.signinSilent();
 });
 
 mgr.events.addSilentRenewError(function (err) {
@@ -66,14 +66,14 @@ mgr.events.addSilentRenewError(function (err) {
     // ids登录的session已过期
     if (err.error === 'login_required') {
         alert('身份信息已过期');
-        userManager.removeUser().then(() => {
+        mgr.removeUser().then(() => {
             alert('移除用户信息');
-            userManager.signinRedirect().catch((err) => {
+            mgr.signinRedirect().catch((err) => {
                 console.log(err);
             });
         });
     } else {
-        userManager
+        mgr
             .signoutRedirect()
             .then((resp) => {
                 console.log('signed out', resp);
@@ -90,7 +90,7 @@ mgr.events.addUserLoaded((user) => {
 
 mgr.events.addUserSignedOut(() => {
     alert('用户已注销登录');
-    userManager.signinRedirect().catch((err) => {
+    mgr.signinRedirect().catch((err) => {
         console.log(err);
     });
 });

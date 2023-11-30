@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY reactclient/package*.json .
 RUN npm ci --omit=dev
-COPY . .
+COPY reactclient/* .
 CMD ["ls", "-a"]
 RUN npx vite build
 

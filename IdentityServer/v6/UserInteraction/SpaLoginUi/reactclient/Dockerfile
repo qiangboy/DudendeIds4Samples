@@ -1,7 +1,7 @@
 # 指定基础镜像
 FROM node:latest as builder
 WORKDIR /app
-COPY package-lock.json .
+COPY package-lock.json ./
 RUN npm ci --omit=dev
 COPY . .
 RUN npx vite build

@@ -1,5 +1,5 @@
 # 基础镜像
-FROM node:14-alpine
+FROM node
 
 # 设置工作目录
 WORKDIR /app
@@ -8,13 +8,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # 安装项目依赖
-RUN npm ci --only=production
+RUN npm i vite -G
 
 # 复制所有源代码到工作目录
 COPY . .
 
 # 构建 React 应用
-RUN npm run build
+RUN vite build
 
 # 配置 Nginx 服务器来提供静态内容
 FROM nginx:alpine

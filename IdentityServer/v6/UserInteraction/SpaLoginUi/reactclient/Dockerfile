@@ -2,11 +2,10 @@
 FROM node:latest as builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm ci --production
 COPY . .
-RUN npm i vite -D
-RUN npm run build
- 
+RUN npx vite build
+
 # 构建生成最终镜像
 FROM nginx:latest
 COPY --from=builder /app/dist /usr/share/nginx/html

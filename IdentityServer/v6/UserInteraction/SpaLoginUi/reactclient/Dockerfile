@@ -2,13 +2,9 @@
 FROM node:latest as builder
 WORKDIR /app
 
-COPY ["reactclient/package-lock.json", "reactclient/"]
-COPY ["reactclient/package.json", "reactclient/"]
-WORKDIR "/app/reactclient"
+COPY reactclient/package*.json .
 RUN npm ci --omit=dev
-WORKDIR /app
 COPY . .
-WORKDIR "/app/reactclient"
 RUN npx vite build
 
 # 构建生成最终镜像

@@ -44,8 +44,8 @@ services:
     container_name: reactclient
     image: ${DOCKER_REGISTRY-}reactclient
     build:
-      context: .
-      dockerfile: reactclient/Dockerfile
+      context: ./reactclient
+      dockerfile: Dockerfile
     depends_on:
       - nginx-for-ids
       - nginx-for-api-gateway

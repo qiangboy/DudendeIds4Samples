@@ -2,9 +2,9 @@
 FROM node:latest as builder
 WORKDIR /app
 
-COPY reactclient/package*.json .
-RUN npm ci --omit=dev
-COPY reactclient/* .
+COPY package*.json ./
+RUN npm install
+COPY . .
 RUN cat index.html
 RUN npx vite build
 

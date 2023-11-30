@@ -1,29 +1,13 @@
-# 基础镜像
-FROM node
-
-# 设置工作目录
+# 指定基础镜像
+FROM node:latest as builder
 WORKDIR /app
-
-# 将 package.json 和 package-lock.json 文件复制到工作目录
 COPY package*.json ./
-
-# 复制所有源代码到工作目录
+RUN npm ci --only=production
 COPY . .
-
-# 安装项目依赖
-RUN npm i vite -G
-
-# 构建 React 应用
-RUN vite build
-
-# 配置 Nginx 服务器来提供静态内容
-FROM nginx:alpine
-
-# 拷贝构建好的 React 应用到 Nginx 的默认静态文件路径
-COPY --from=0 /app/build /usr/share/nginx/html
-
-# 暴露80端口作为访问接口
+RUN npm run build
+ 
+# 构建生成最终镜像
+FROM nginx:latest
+COPY --from=builder /app/build /usr/share/nginx/html
 EXPOSE 80
-
-# 启动 Nginx 服务器
 CMD ["nginx", "-g", "daemon off;"]

@@ -10,6 +10,6 @@ RUN npx vite build
 # 构建生成最终镜像
 FROM nginx:latest
 COPY --from=builder /app/dist /usr/share/nginx/html
-COPY --from=builder /app/dist/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

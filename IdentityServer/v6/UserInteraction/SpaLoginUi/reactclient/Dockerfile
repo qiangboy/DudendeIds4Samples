@@ -6,8 +6,9 @@ COPY ["reactclient/package-lock.json", "reactclient/"]
 COPY ["reactclient/package.json", "reactclient/"]
 WORKDIR "/app/reactclient"
 RUN npm ci --omit=dev
+WORKDIR "/app"
 COPY . .
-RUN echo "Contents of current directory:" && ls -al
+WORKDIR "/app/reactclient"
 RUN npx vite build
 
 # 构建生成最终镜像

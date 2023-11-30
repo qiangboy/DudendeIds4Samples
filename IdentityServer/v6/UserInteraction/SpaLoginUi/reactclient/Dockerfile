@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --only=production
 COPY . .
+RUN npm i vite -D
 RUN npm run build
  
 # 构建生成最终镜像

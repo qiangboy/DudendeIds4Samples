@@ -1,8 +1,8 @@
 # 指定基础镜像
 FROM node:latest as builder
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci --production
+COPY package*.json .
+RUN npm ci --omit=dev
 COPY . .
 RUN npx vite build
 

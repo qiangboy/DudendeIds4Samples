@@ -15,7 +15,7 @@ const userManager = new UserManager({
   monitorSession: !import.meta.env.DEV,
 });
 
-console.log('UserManager:', {
+console.log('UserManagerConfig:', {
   ...userManagerSettings,
   authority: import.meta.env.VITE_AuthServer_Authority,
   client_id: 'test',

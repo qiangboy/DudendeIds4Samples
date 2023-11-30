@@ -1,7 +1,8 @@
 # 指定基础镜像
 FROM node:latest as builder
 WORKDIR /app
-COPY package-lock.json ./
+
+COPY ["reactclient/package-lock.json", "reactclient/"]
 RUN npm ci --omit=dev
 COPY . .
 RUN npx vite build

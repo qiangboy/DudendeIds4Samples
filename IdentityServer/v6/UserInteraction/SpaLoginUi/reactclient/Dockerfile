@@ -5,7 +5,7 @@ WORKDIR /app
 COPY reactclient/package*.json .
 RUN npm ci --omit=dev
 COPY reactclient/* .
-CMD ["ls", "-a"]
+RUN cat index.html
 RUN npx vite build
 
 # 构建生成最终镜像

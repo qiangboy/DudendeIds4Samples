@@ -2,7 +2,7 @@
 FROM node:latest as builder
 WORKDIR /app
 
-COPY reactclient/. .
+COPY . .
 #COPY reactclient/package*.json .
 RUN npm ci --omit=dev
 

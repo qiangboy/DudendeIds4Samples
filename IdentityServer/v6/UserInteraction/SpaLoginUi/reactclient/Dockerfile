@@ -3,6 +3,7 @@ FROM node:latest as builder
 WORKDIR /app
 
 COPY ["reactclient/package-lock.json", "reactclient/"]
+WORKDIR "/app/reactclient"
 RUN npm ci --omit=dev
 COPY . .
 RUN npx vite build

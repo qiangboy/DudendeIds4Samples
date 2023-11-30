@@ -2,10 +2,10 @@
 FROM node:latest as builder
 WORKDIR /app
 
-COPY . .
-#COPY reactclient/package*.json .
+COPY reactclient/package*.json .
 RUN npm ci --omit=dev
-
+COPY . .
+RUN cat a.txt
 RUN npx vite build
 
 # 构建生成最终镜像

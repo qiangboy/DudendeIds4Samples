@@ -7,11 +7,11 @@ WORKDIR /app
 # 将 package.json 和 package-lock.json 文件复制到工作目录
 COPY package*.json ./
 
-# 安装项目依赖
-RUN npm i vite -G
-
 # 复制所有源代码到工作目录
 COPY . .
+
+# 安装项目依赖
+RUN npm i vite -G
 
 # 构建 React 应用
 RUN vite build

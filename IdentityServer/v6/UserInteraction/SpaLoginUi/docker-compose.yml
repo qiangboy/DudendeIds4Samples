@@ -40,6 +40,19 @@ services:
       - mynet
 
 
+  reactclient:
+    container_name: reactclient
+    image: ${DOCKER_REGISTRY-}reactclient
+    build:
+      context: .
+      dockerfile: reactclient/Dockerfile
+    depends_on:
+      - nginx-for-ids
+      - nginx-for-api-gateway
+    networks:
+      - mynet
+
+
   productservice:
     container_name: productservice
     image: ${DOCKER_REGISTRY-}productservice

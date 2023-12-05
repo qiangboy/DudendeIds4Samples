@@ -50,7 +50,7 @@ app.UseCors("DefaultPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapGet("api/order", () => "¶©µ¥·şÎñ")
+app.MapGet("api/order", () => "è®¢å•æœåŠ¡")
     .WithName("order")
     .RequireAuthorization();
 

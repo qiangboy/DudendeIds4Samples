@@ -50,8 +50,8 @@ app.UseCors("DefaultPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapGet("api/product", () => "产品服务")
+app.MapGet("api/product", () => "浜у搧鏈嶅姟")
 .WithName("product")
-.RequireAuthorization(); ;
+.RequireAuthorization();
 
 app.Run();
